@@ -5,17 +5,31 @@ using UnityEngine;
 
 public class CoroutinePrint : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
-        StartCoroutine("Ik start nu de coroutine", 0.5);
-        StartCoroutine("Coroutine update", 1);
-        StartCoroutine("Coroutine einde", 1.5);
+        Dictionary<String, float> messagesToPrint = new Dictionary<string, float>();
+        
+        // Fill the map with the messages and there delays.
+        messagesToPrint.Add("Ik start nu de coroutine", 0);
+        for (int i = 0; i < 10; i++)
+        {
+            messagesToPrint.Add("coroutine update - " + i, 0.5f);
+        }
+        messagesToPrint.Add("coroutine einde", 0);
+        
+        
+        StartCoroutine(PrintMessages(messagesToPrint));
     }
 
-    public IEnumerator print(String msg, float delay)
+    public IEnumerator PrintMessages(Dictionary<String, float> map)
     {
-        yield return new WaitForSeconds(delay);
-        Debug.Log(msg);
+        foreach (var keyValuePair in map)
+        {
+            String message = keyValuePair.Key;
+            float delay = keyValuePair.Value;
+            yield return new WaitForSeconds(delay);
+            Debug.Log(message);
+        }
     }
 }
