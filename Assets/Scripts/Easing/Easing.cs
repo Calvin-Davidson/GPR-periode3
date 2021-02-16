@@ -2,7 +2,6 @@ using System;
 
 public static class Easing
 {
-
     public static float EaseInSine(float x)
     {
         return (float) (1 - Math.Cos((x * Math.PI) / 2));
@@ -10,7 +9,7 @@ public static class Easing
 
     public static float EaseOutSine(float x)
     {
-        return (float)(Math.Sin((x * Math.PI) / 2));
+        return (float) (Math.Sin((x * Math.PI) / 2));
     }
 
     public static float EaseInOutSine(float x)
@@ -62,7 +61,9 @@ public static class Easing
 
     public static float EaseInOutCirc(float x)
     {
-        return (float) (x < 0.5 ? (1 - Math.Sqrt(1 - Math.Pow(2 * x, 2))) / 2 : (Math.Sqrt(1 - Math.Pow(-2 * x + 2, 2)) + 1) / 2);
+        return (float) (x < 0.5
+            ? (1 - Math.Sqrt(1 - Math.Pow(2 * x, 2))) / 2
+            : (Math.Sqrt(1 - Math.Pow(-2 * x + 2, 2)) + 1) / 2);
     }
 
     public static float EaseInElastic(float x)
@@ -83,7 +84,10 @@ public static class Easing
     {
         float c5 = (float) ((2 * Math.PI) / 4.5);
 
-        return (float) (x == 0 ? 0 : x == 1 ? 1 : x < 0.5 ? -(Math.Pow(2, 20 * x - 10) * Math.Sin((20 * x - 11.125) * c5)) / 2 : (Math.Pow(2, -20 * x + 10) * Math.Sin((20 * x - 11.125) * c5)) / 2 + 1);
+        return (float) (x == 0 ? 0 :
+            x == 1 ? 1 :
+            x < 0.5 ? -(Math.Pow(2, 20 * x - 10) * Math.Sin((20 * x - 11.125) * c5)) / 2 :
+            (Math.Pow(2, -20 * x + 10) * Math.Sin((20 * x - 11.125) * c5)) / 2 + 1);
     }
 
 
@@ -95,7 +99,7 @@ public static class Easing
 
     public static float EaseOutQuad(float x)
     {
-        return (float)(1 - (1 - x) * (1 - x));
+        return (float) (1 - (1 - x) * (1 - x));
     }
 
     public static float EaseInOutQuad(float x)
@@ -130,14 +134,16 @@ public static class Easing
 
     public static float EaseInOutExpo(float x)
     {
-        return (float) (x == 0 ? 0 : x == 1 ? 1 : x < 0.5 ? Math.Pow(2, 20 * x - 10) / 2 : (2 - Math.Pow(2, -20 * x + 10)) / 2);
+        return (float) (x == 0 ? 0 :
+            x == 1 ? 1 :
+            x < 0.5 ? Math.Pow(2, 20 * x - 10) / 2 : (2 - Math.Pow(2, -20 * x + 10)) / 2);
     }
 
     public static float EaseInBack(float x)
     {
         float c1 = 1.70158f;
         float c3 = c1 + 1;
-        
+
         return (float) (c3 * x * x * x - c1 * x * x);
     }
 
@@ -154,7 +160,9 @@ public static class Easing
         float c1 = 1.70158f;
         float c2 = c1 * 1.525f;
 
-        return (float)(x < 0.5 ? (Math.Pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2 : (Math.Pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2);
+        return (float) (x < 0.5
+            ? (Math.Pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
+            : (Math.Pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2);
     }
 
     public static float EaseInBounce(float x)
@@ -187,7 +195,75 @@ public static class Easing
 
     public static float EaseInOutBounce(float x)
     {
-        return (float)(x < 0.5 ? (1 - EaseOutBounce(1 - 2 * x)) / 2 : (1 + EaseOutBounce(2 * x - 1)) / 2);
+        return (float) (x < 0.5 ? (1 - EaseOutBounce(1 - 2 * x)) / 2 : (1 + EaseOutBounce(2 * x - 1)) / 2);
     }
 
+    public static float Ease(EasingType type, float t)
+    {
+        switch (type)
+        {
+            case EasingType.EaseInSine:
+                return EaseInSine(t);
+            case EasingType.EaseOutSine:
+                return EaseOutSine(t);
+            case EasingType.EaseInOutSine:
+                return EaseInOutSine(t);
+            case EasingType.EaseInCubic:
+                return EaseInCubic(t);
+            case EasingType.EaseOutCubic:
+                return EaseOutCubic(t);
+            case EasingType.EaseInOutCubic:
+                return EaseInOutCubic(t);
+            case EasingType.EaseInQuint:
+                return EaseInQuint(t);
+            case EasingType.EaseOutQuint:
+                return EaseOutQuint(t);
+            case EasingType.EaseInOutQuint:
+                return EaseInOutQuint(t);
+            case EasingType.EaseInCirc:
+                return EaseInCirc(t);
+            case EasingType.EaseOutCirc:
+                return EaseOutCirc(t);
+            case EasingType.EaseInOutCirc:
+                return EaseInOutCirc(t);
+            case EasingType.EaseInElastic:
+                return EaseInElastic(t);
+            case EasingType.EaseOutElastic:
+                return EaseOutElastic(t);
+            case EasingType.EaseInOutElastic:
+                return EaseInOutElastic(t);
+            case EasingType.EaseInQuad:
+                return EaseInQuad(t);
+            case EasingType.EaseOutQuad:
+                return EaseOutQuad(t);
+            case EasingType.EaseInOutQuad:
+                return EaseInOutQuad(t);
+            case EasingType.EaseInQuart:
+                return EaseInQuart(t);
+            case EasingType.EaseOutQuart:
+                return EaseOutQuart(t);
+            case EasingType.EaseInOutQuart:
+                return EaseInOutQuart(t);
+            case EasingType.EaseInExpo:
+                return EaseInExpo(t);
+            case EasingType.EaseOutExpo:
+                return EaseOutExpo(t);
+            case EasingType.EaseInOutExpo:
+                return EaseInOutExpo(t);
+            case EasingType.EaseInBack:
+                return EaseInBack(t);
+            case EasingType.EaseOutBack:
+                return EaseOutBack(t);
+            case EasingType.EaseInOutBack:
+                return EaseInBounce(t);
+            case EasingType.EaseInBounce:
+                return EaseOutBounce(t);
+            case EasingType.EaseOutBounce:
+                return EaseOutBounce(t);
+            case EasingType.EaseInOutBounce:
+                return EaseInBounce(t);
+        }
+
+        return t;
+    }
 }
